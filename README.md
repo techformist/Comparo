@@ -197,7 +197,7 @@ The current implementation (Phases 1-8 complete) includes a fully functional Ava
 
 ## License
 
-TBD
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
