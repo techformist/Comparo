@@ -1,0 +1,3 @@
+[submodule "Comparo.Tests/TestData"]
+	path = Comparo.Tests/TestData
+	url = https://github.com/techformist/Comparo.TestData
