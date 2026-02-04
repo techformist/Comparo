@@ -7,6 +7,7 @@ This document consolidates all performance-related information: test data source
 ---
 
 ## Table of Contents
+
 - [Test Data](#test-data)
 - [Performance Targets](#performance-targets)
 - [Running Performance Tests](#running-performance-tests)
@@ -25,6 +26,7 @@ Real-world test data is maintained in a separate repository as a git submodule:
 **Repository:** https://github.com/techformist/Comparo.TestData
 
 **Structure:**
+
 ```
 Comparo.TestData/
 ├── 01_identical_files/          # Files with no changes
@@ -82,13 +84,13 @@ git submodule update --remote Comparo.Tests/TestData
 
 From the PRD, key performance targets:
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| Diff computation (10MB files) | <500ms | ✓ On track |
-| Memory efficiency | <5x file size | ✓ On track |
-| Large file support | Up to 100MB | ✓ Tested |
-| Scroll latency (UI) | <16ms | N/A (Core library) |
-| Startup time (UI) | <500ms | N/A (Core library) |
+| Metric                        | Target        | Status             |
+| ----------------------------- | ------------- | ------------------ |
+| Diff computation (10MB files) | <500ms        | ✓ On track         |
+| Memory efficiency             | <5x file size | ✓ On track         |
+| Large file support            | Up to 100MB   | ✓ Tested           |
+| Scroll latency (UI)           | <16ms         | N/A (Core library) |
+| Startup time (UI)             | <500ms        | N/A (Core library) |
 
 ---
 
@@ -122,6 +124,7 @@ dotnet test --filter "FullyQualifiedName~RealWorldDataTests"
 ```
 
 **Available Real-World Tests:**
+
 - `IdenticalFiles_AllAlgorithms_ShouldDetectNoChanges`
 - `MinorChanges_5Percent_AllAlgorithms_PerformanceTest`
 - `ModerateChanges_20Percent_AllAlgorithms_PerformanceTest`
@@ -146,16 +149,16 @@ dotnet run --configuration Release --framework net10.0
 
 ### Core Performance Test Files
 
-| File | Purpose | Test Count |
-|------|---------|------------|
-| **TestDataGenerator.cs** | Generates synthetic test data | N/A (Helper) |
-| **AlgorithmPerformanceTests.cs** | Algorithm comparisons | 10+ |
-| **FileComparisonPerformanceTests.cs** | Single file benchmarks | 20+ |
-| **MultiFileComparisonPerformanceTests.cs** | Batch comparison tests | 10+ |
-| **SemanticComparisonPerformanceTests.cs** | JSON/XML semantic tests | 15+ |
-| **MemoryUsagePerformanceTests.cs** | Memory validation | 8+ |
-| **CachingPerformanceTests.cs** | Cache efficiency tests | 12+ |
-| **RealWorldDataTests.cs** | Integration with TestData repo | 6 |
+| File                                       | Purpose                        | Test Count   |
+| ------------------------------------------ | ------------------------------ | ------------ |
+| **TestDataGenerator.cs**                   | Generates synthetic test data  | N/A (Helper) |
+| **AlgorithmPerformanceTests.cs**           | Algorithm comparisons          | 10+          |
+| **FileComparisonPerformanceTests.cs**      | Single file benchmarks         | 20+          |
+| **MultiFileComparisonPerformanceTests.cs** | Batch comparison tests         | 10+          |
+| **SemanticComparisonPerformanceTests.cs**  | JSON/XML semantic tests        | 15+          |
+| **MemoryUsagePerformanceTests.cs**         | Memory validation              | 8+           |
+| **CachingPerformanceTests.cs**             | Cache efficiency tests         | 12+          |
+| **RealWorldDataTests.cs**                  | Integration with TestData repo | 6            |
 
 ### Test Data Generator Capabilities
 
@@ -171,6 +174,7 @@ The `TestDataGenerator` class provides synthetic data:
 ### Benchmark Categories
 
 #### 1. File Size Benchmarks
+
 - 10KB (~200 lines)
 - 100KB (~2,000 lines)
 - 1MB (~20,000 lines)
@@ -178,17 +182,20 @@ The `TestDataGenerator` class provides synthetic data:
 - 100MB (~2,000,000 lines)
 
 #### 2. Algorithm Benchmarks
+
 - **MyersDiff**: Classic O(ND) difference algorithm
 - **PatienceDiff**: Optimized for code with unique lines
 - **HistogramDiff**: Fast histogram-based algorithm
 
 #### 3. Format-Specific Benchmarks
+
 - Plain text (.txt)
 - Markdown (.md)
 - JSON (.json) - line-based and semantic
 - XML (.xml) - line-based and semantic
 
 #### 4. Change Percentage Benchmarks
+
 - Identical files (0% changes)
 - Small changes (5%, 10%)
 - Moderate changes (20%, 30%)
@@ -197,6 +204,7 @@ The `TestDataGenerator` class provides synthetic data:
 - Reordered content
 
 #### 5. Memory Benchmarks
+
 - Peak memory usage
 - Memory efficiency ratio (memory/file size)
 - Memory leak detection
@@ -215,34 +223,34 @@ The `TestDataGenerator` class provides synthetic data:
 ### Diff Computation Performance
 
 | File Size | Format | Algorithm | Target | Actual | Status |
-|-----------|---------|-----------|--------|--------|--------|
-| 10KB | txt | Myers | <500ms | ~50ms | ✓ Pass |
-| 100KB | txt | Myers | <500ms | ~150ms | ✓ Pass |
-| 1MB | txt | Myers | <500ms | ~400ms | ✓ Pass |
-| 10MB | txt | Myers | <500ms | ~450ms | ✓ Pass |
-| 10KB | json | Semantic | <500ms | ~80ms | ✓ Pass |
-| 100KB | json | Semantic | <500ms | ~250ms | ✓ Pass |
+| --------- | ------ | --------- | ------ | ------ | ------ |
+| 10KB      | txt    | Myers     | <500ms | ~50ms  | ✓ Pass |
+| 100KB     | txt    | Myers     | <500ms | ~150ms | ✓ Pass |
+| 1MB       | txt    | Myers     | <500ms | ~400ms | ✓ Pass |
+| 10MB      | txt    | Myers     | <500ms | ~450ms | ✓ Pass |
+| 10KB      | json   | Semantic  | <500ms | ~80ms  | ✓ Pass |
+| 100KB     | json   | Semantic  | <500ms | ~250ms | ✓ Pass |
 
-*Note: Actual benchmarks TBD - run `dotnet test --filter Performance` for latest results*
+_Note: Actual benchmarks TBD - run `dotnet test --filter Performance` for latest results_
 
 ### Memory Efficiency Results
 
 | File Size | Target | Actual Ratio | Status |
-|-----------|--------|--------------|--------|
-| 10MB | <5x | ~3.2x | ✓ Pass |
-| 100MB | <5x | ~4.1x | ✓ Pass |
+| --------- | ------ | ------------ | ------ |
+| 10MB      | <5x    | ~3.2x        | ✓ Pass |
+| 100MB     | <5x    | ~4.1x        | ✓ Pass |
 
 ### Algorithm Comparison
 
 Performance characteristics by use case:
 
-| Scenario | Best Algorithm | Reason |
-|----------|---------------|--------|
-| Identical files | Histogram | Fastest for no-change detection |
-| Small code changes | Patience | Better quality for code with unique lines |
-| Large text changes | Myers | Most balanced performance |
-| Reordered content | Patience | Better handles moved blocks |
-| JSON/XML | Semantic | Purpose-built for structured data |
+| Scenario           | Best Algorithm | Reason                                    |
+| ------------------ | -------------- | ----------------------------------------- |
+| Identical files    | Histogram      | Fastest for no-change detection           |
+| Small code changes | Patience       | Better quality for code with unique lines |
+| Large text changes | Myers          | Most balanced performance                 |
+| Reordered content  | Patience       | Better handles moved blocks               |
+| JSON/XML           | Semantic       | Purpose-built for structured data         |
 
 ---
 
@@ -254,18 +262,18 @@ Performance characteristics by use case:
 
 ### Comparison Table
 
-| Tool | Open Source | Max File Size | Benchmark Data | Performance Claims |
-|------|-------------|---------------|----------------|-------------------|
-| Git diff | ✓ Yes | ~100-500MB (RAM-limited) | ❌ None | Uses histogram algorithm |
-| GNU diffutils | ✓ Yes | No limit documented | ❌ None | O(ND) Myers algorithm |
-| Meld | ✓ Yes | No limit documented | ❌ None | Python-based, slower |
-| WinMerge | ✓ Yes | ~332MB reported | ✓ Limited | v2.16.25 improvements |
-| Beyond Compare | ✗ Commercial | No limit documented | ❌ None | No public benchmarks |
-| KDiff3 | ✓ Yes | No limit documented | ❌ None | Binary comparison disabled |
-| Delta (git-delta) | ✓ Yes | Git memory limit | ⚠️ Claims "fast" | Rust-based |
-| Google diff-match-patch | ✓ Yes | No limit documented | ⚠️ Has tests | Used in Google Docs |
-| VS Code diff | ✓ Yes | VS Code memory limit | ❌ None | Uses LibXDiff |
-| **Comparo** | ✓ Yes | **100MB tested** | ✓ **Yes** | **<500ms for 10MB** |
+| Tool                    | Open Source  | Max File Size            | Benchmark Data   | Performance Claims         |
+| ----------------------- | ------------ | ------------------------ | ---------------- | -------------------------- |
+| Git diff                | ✓ Yes        | ~100-500MB (RAM-limited) | ❌ None          | Uses histogram algorithm   |
+| GNU diffutils           | ✓ Yes        | No limit documented      | ❌ None          | O(ND) Myers algorithm      |
+| Meld                    | ✓ Yes        | No limit documented      | ❌ None          | Python-based, slower       |
+| WinMerge                | ✓ Yes        | ~332MB reported          | ✓ Limited        | v2.16.25 improvements      |
+| Beyond Compare          | ✗ Commercial | No limit documented      | ❌ None          | No public benchmarks       |
+| KDiff3                  | ✓ Yes        | No limit documented      | ❌ None          | Binary comparison disabled |
+| Delta (git-delta)       | ✓ Yes        | Git memory limit         | ⚠️ Claims "fast" | Rust-based                 |
+| Google diff-match-patch | ✓ Yes        | No limit documented      | ⚠️ Has tests     | Used in Google Docs        |
+| VS Code diff            | ✓ Yes        | VS Code memory limit     | ❌ None          | Uses LibXDiff              |
+| **Comparo**             | ✓ Yes        | **100MB tested**         | ✓ **Yes**        | **<500ms for 10MB**        |
 
 ### Comparo's Competitive Advantage
 
@@ -279,12 +287,14 @@ Performance characteristics by use case:
 ### Methodology Differences
 
 Most tools focus on:
+
 - Algorithm correctness
 - Feature completeness
 - UI/UX quality
 - Integration with version control
 
 Comparo additionally emphasizes:
+
 - Quantified performance targets
 - Reproducible benchmarks
 - Public test data
@@ -358,17 +368,20 @@ Console.WriteLine($"Real-world diff: {sw.ElapsedMilliseconds}ms");
 ## References
 
 ### Internal Documentation
+
 - [Main README](../README.md) - Project overview
 - [SETUP Guide](../SETUP.md) - Installation and setup
 - [TestData Repository](https://github.com/techformist/Comparo.TestData) - Test data source
 
 ### Performance Research Sources
+
 - Myers Algorithm: "An O(ND) Difference Algorithm and Its Variations" (1986)
 - Patience Diff: Bram Cohen's patience diff algorithm
 - Histogram Diff: Git's histogram algorithm implementation
 - Industry tools analysis: Git, GNU diffutils, Meld, WinMerge, Beyond Compare
 
 ### Test Frameworks
+
 - xUnit: https://xunit.net/
 - FluentAssertions: https://fluentassertions.com/
 - BenchmarkDotNet: https://benchmarkdotnet.org/

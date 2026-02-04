@@ -115,15 +115,16 @@ Comparo is designed for high performance with quantified targets and real-world 
 
 ### Performance Targets
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| Diff computation (10MB files) | <500ms | ✓ On track |
-| Memory efficiency | <5x file size | ✓ On track |
-| Large file support | Up to 100MB | ✓ Tested |
+| Metric                        | Target        | Status     |
+| ----------------------------- | ------------- | ---------- |
+| Diff computation (10MB files) | <500ms        | ✓ On track |
+| Memory efficiency             | <5x file size | ✓ On track |
+| Large file support            | Up to 100MB   | ✓ Tested   |
 
 ### Test Data
 
 Real-world test data is maintained in a separate repository:
+
 - **Repository:** https://github.com/techformist/Comparo.TestData
 - **Includes:** 20+ test scenarios with real files (JSON, XML, Salesforce Apex, etc.)
 - **Access:** Automatically available via git submodules
