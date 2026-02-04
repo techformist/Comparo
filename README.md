@@ -109,13 +109,36 @@ Comparo has been split into three independent projects for better reusability:
 | Phase 9  | ✅ Complete    | Testing                       |
 | Phase 10 | ⏳ In Progress | Documentation & Polish        |
 
-## Performance Documentation
+## Performance
 
-📊 **[Comparo Performance Test Results](docs/PERFORMANCE_TEST_RESULTS.md)** - Comprehensive performance benchmarks and analysis
+Comparo is designed for high performance with quantified targets and real-world testing.
 
-📈 **[Performance Benchmark Research](docs/PERFORMANCE_BENCHMARK_RESEARCH.md)** - Research on open source file comparison tools
+### Performance Targets
 
-🧪 **[Performance Tests README](docs/PERFORMANCE_TESTS_README.md)** - Guide to running performance benchmarks
+| Metric | Target | Status |
+|--------|--------|--------|
+| Diff computation (10MB files) | <500ms | ✓ On track |
+| Memory efficiency | <5x file size | ✓ On track |
+| Large file support | Up to 100MB | ✓ Tested |
+
+### Test Data
+
+Real-world test data is maintained in a separate repository:
+- **Repository:** https://github.com/techformist/Comparo.TestData
+- **Includes:** 20+ test scenarios with real files (JSON, XML, Salesforce Apex, etc.)
+- **Access:** Automatically available via git submodules
+
+### Running Performance Tests
+
+```bash
+# Run all performance tests
+dotnet test --filter "FullyQualifiedName~Performance"
+
+# Run real-world data tests (requires TestData submodule)
+dotnet test --filter "FullyQualifiedName~RealWorldDataTests"
+```
+
+📊 **[Complete Performance Documentation](docs/PERFORMANCE.md)** - Detailed benchmarks, test data info, and competitive analysis
 
 ## Development Commands
 
@@ -123,8 +146,6 @@ Comparo has been split into three independent projects for better reusability:
 # Run tests (from Comparo)
 cd ../Comparo
 dotnet test
-# Run performance tests (from Comparo)
-dotnet test --filter "*Performance*"
 
 # Clean build artifacts
 dotnet clean
