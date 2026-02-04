@@ -50,12 +50,6 @@ c:\\dev\\1p\\dotnet\\
 └── Comparo (this repo)    # Documentation + solution for core/tests
 ```
 
-## Documentation
-
-- **PRD.md** - Full Product Requirements Document
-- **EXECUTION_PLAN.md** - Detailed execution plan with 10 phases
-- **PRD_METACOMP_SF.md** - Product Requirements for MetaComp-SF (Salesforce metadata comparison)
-
 ## Project Split Information
 
 Comparo has been split into three independent projects for better reusability:
@@ -79,7 +73,7 @@ Comparo has been split into three independent projects for better reusability:
 - **Uses:** Comparo Core for diff engine
 - **Features:** SF CLI integration, metadata-type-aware comparison
 
-## Key Features (Per PRD)
+## Key Features
 
 - ✅ Cross-platform UI (Avalonia)
 - ✅ Semantic comparison for JSON/XML (NOT line-by-line)
@@ -202,7 +196,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 TBD
-
----
-
-**Note:** This project follows the architecture and requirements defined in PRD.md. Refer to PRD.md for detailed specifications.
